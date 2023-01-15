@@ -6,17 +6,30 @@ public class Stone : MonoBehaviour
 {
     bool isopen;
     public GameObject text;
+    bool inplace;
     void Start(){
         isopen = false;
         text.SetActive(isopen);
+        inplace = false;
     }
-    private void OnTriggerStay2D(Collider2D other){
-        if(other.gameObject.CompareTag("Player")){
-            if(Input.GetKeyDown("e")){
+    private void Update(){
+        if(Input.GetKeyDown("e")){
+            if(inplace){
                 isopen = !isopen;
-                Debug.Log("123");
                 text.SetActive(isopen);
             }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.CompareTag("Player")){
+            inplace = true;
+            Tank.instance.sign.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.CompareTag("Player")){
+            inplace = false;
+            Tank.instance.sign.SetActive(false);
         }
     }
 }

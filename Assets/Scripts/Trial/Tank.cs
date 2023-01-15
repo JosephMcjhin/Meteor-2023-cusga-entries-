@@ -5,6 +5,17 @@ using UnityEngine;
 public class Tank : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public static Tank instance;
+    void Awake(){
+        if(instance!=null){
+            Destroy(this);
+        }
+        instance = this;
+    }
+
+    public GameObject sign;
+
     float horizontal;
     float vertical;
     Vector2 lookDirection = new Vector2(0, 1);
@@ -61,6 +72,7 @@ public class Tank : MonoBehaviour
         enemy_gen_now = 0;
         now_health = max_health;
         Inventory.SetActive(false);
+        mask.instance.SetValue((float)1);
     }
 
     // Update is called once per frame
@@ -127,6 +139,7 @@ public class Tank : MonoBehaviour
             {
                 now_health += x;
                 invisible_now = invisible_time;
+                mask.instance.SetValue((float)now_health/max_health);
                 if (now_health <= 0)
                 {
                     Destroy(gameObject);
@@ -137,7 +150,9 @@ public class Tank : MonoBehaviour
         {
             now_health += x;
             now_health = Mathf.Min(now_health, max_health);
+            mask.instance.SetValue((float)now_health/max_health);
         }
+
         Debug.Log(now_health);
     }
 
