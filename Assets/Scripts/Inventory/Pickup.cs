@@ -6,11 +6,16 @@ public class Pickup : MonoBehaviour
 {
     public Item item;
     public Inventory bag;
+    bool inplace;
 
-    private void OnCollisionStay2D(Collision2D other){
+    void Start(){
+        inplace = false;
+        Tank.instance.sign.SetActive(false);
+    }
+
+    private void Update(){
         if(Input.GetKeyDown("e")){
-            //Debug.Log("123");
-            if(other.gameObject.CompareTag("Player")){
+            if(inplace){
                 if(bag.ItemList.Contains(item)){
                     item.ItemHold ++;
                     InventoryManager.PlusHold();
@@ -22,6 +27,19 @@ public class Pickup : MonoBehaviour
                 }
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.CompareTag("Player")){
+            inplace = true;
+            Tank.instance.sign.SetActive(true);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D other){
+        if(other.gameObject.CompareTag("Player")){
+            inplace = false;
+            Tank.instance.sign.SetActive(false);
         }
     }
 

@@ -15,4 +15,4 @@ MonoBehaviour:
   ItemName: Flower
   ItemImage: {fileID: -423956906, guid: fe524e66189e6224d96fdccd1668dcb7, type: 3}
   ItemInfo: This is a flower!
-  ItemHold: 0
+  ItemHold: 5
