@@ -16,16 +16,24 @@ public class Pickup : MonoBehaviour
     private void Update(){
         if(Input.GetKeyDown("e")){
             if(inplace){
-                if(bag.ItemList.Contains(item)){
-                    item.ItemHold ++;
-                    InventoryManager.PlusHold();
+                int index = bag.ItemList.IndexOf(item);
+                if(index != -1){
+                    bag.NumList[index]++;
+                    InventoryManager.pickup_add(item, index);
+                    Destroy(gameObject);
                 }
                 else{
-                    bag.ItemList.Add(item);
-                    InventoryManager.CreateItem(item);
-                    item.ItemHold = 1;
+                    for(int i = 0; i < bag.ItemList.Count; i++){
+                        if(bag.NumList[i] == 0){
+                            bag.NumList[i] ++;
+                            bag.ItemList[i] = item;
+                            InventoryManager.pickup_add(item, i);
+                            Destroy(gameObject);
+                            break;
+                        }
+                    }
+                    //item.ItemHold = 1;
                 }
-                Destroy(gameObject);
             }
         }
     }
@@ -43,18 +51,4 @@ public class Pickup : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.CompareTag("Player")){
-            if(bag.ItemList.Contains(item)){
-                item.ItemHold ++;
-                InventoryManager.PlusHold();
-            }
-            else{
-                bag.ItemList.Add(item);
-                InventoryManager.CreateItem(item);
-                item.ItemHold = 1;
-            }
-            Destroy(gameObject);
-        }
-    }
 }

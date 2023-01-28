@@ -6,4 +6,6 @@ using UnityEngine;
 public class Inventory : ScriptableObject
 {
     public List<Item> ItemList = new List<Item>();
+    public List<int> NumList = new List<int>();
+    public int max_capacity;
 }

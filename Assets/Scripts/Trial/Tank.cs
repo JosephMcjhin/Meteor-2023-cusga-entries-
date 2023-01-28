@@ -29,8 +29,6 @@ public class Tank : MonoBehaviour
     }
 
     //计时器更新
-    public float bullet_time;
-    float bullet_now;   //子弹计时器
     public float invisible_time;
     float invisible_now;    //无敌计时器
     public float enemy_gen_time;
@@ -41,7 +39,6 @@ public class Tank : MonoBehaviour
         return t;
     }
     void Change_time(){
-        bullet_now = c_time(bullet_now);
         invisible_now = c_time(invisible_now);
         enemy_gen_now = c_time(enemy_gen_now);
     }
@@ -88,48 +85,25 @@ public class Tank : MonoBehaviour
 
     float horizontal;
     float vertical;
-    float lookx;
-    float looky;
-    Vector2 lookDirection = new Vector2(0, 1);
+    Vector2 lookDirection;
     Animator animator;
     public float speed = 3.0f;
     Rigidbody2D rigidbody2d;
-    public GameObject projectilePrefab;
     public GameObject Enemy_Prefab;
+
+    public GameObject Weapon;
+
+    public GameObject Weapon_slot;
 
     // Update is called once per frame
     //角色移动，动画，射击
     void Update(){
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        Vector3 Pos = Camera.main.WorldToScreenPoint(transform.position);
-        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Pos.z);
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        lookx = mousePos.x - transform.position.x;
-        looky = mousePos.y - transform.position.y;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lookDirection = (mousePos - new Vector2(transform.position.x,transform.position.y)).normalized;
         Vector2 move = new Vector2(horizontal, vertical);
-
-        if (!Mathf.Approximately(lookx, 0.0f) || !Mathf.Approximately(looky, 0.0f))
-        {
-            lookDirection.Set(lookx, looky);
-            lookDirection.Normalize();
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (bullet_now == 0)
-            {
-                Launch();
-                bullet_now = bullet_time;
-            }
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (bullet_now == 0)
-            {
-                Launch3();
-                bullet_now = bullet_time;
-            }
-        }
+        //transform.right = lookDirection;
 
         if(Input.GetKeyDown("i")){
             bool Inventory_isopen = Inventory.activeSelf;
@@ -142,11 +116,11 @@ public class Tank : MonoBehaviour
             enemy_gen_now = enemy_gen_time;
         }
         animator.SetFloat("Move X", lookDirection.x);
-        animator.SetFloat("Move Y", lookDirection.y);
+        //animator.SetFloat("Move Y", lookDirection.y);
         animator.SetFloat("Look X", lookDirection.x);
-        animator.SetFloat("Look Y", lookDirection.y);
+        //animator.SetFloat("Look Y", lookDirection.y);
         animator.SetFloat("Speed", move.magnitude);
-        Debug.Log(Input.mousePosition);
+        //Debug.Log(transform.right);
     }
     void FixedUpdate(){
         Vector2 position = rigidbody2d.position;
@@ -157,28 +131,6 @@ public class Tank : MonoBehaviour
 
         rigidbody2d.MovePosition(position);
         //Debug.Log(position);
-    }
-
-    //射击
-    void Launch(){
-        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + lookDirection * 0.5f, Quaternion.identity);
-
-        Bullet projectile = projectileObject.GetComponent<Bullet>();
-        projectile.Launch(lookDirection, 300);
-
-        //animator.SetTrigger("Launch");
-    }
-    void Launch3(){
-        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + lookDirection * 0.5f, Quaternion.Euler(0, 0, 0));
-        Bullet projectile = projectileObject.GetComponent<Bullet>();
-        projectile.Launch(lookDirection, 300);
-        projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + rotate(lookDirection, 35) * 0.5f, Quaternion.Euler(0, 0, 0));
-        projectile = projectileObject.GetComponent<Bullet>();
-        projectile.Launch(rotate(lookDirection, 35), 300);
-        projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + rotate(lookDirection, -35) * 0.5f, Quaternion.Euler(0, 0, 0));
-        projectile = projectileObject.GetComponent<Bullet>();
-        projectile.Launch(rotate(lookDirection, -35), 300);
-        //animator.SetTrigger("Launch");
     }
 
     //获取屏幕边缘坐标，生成敌人。
@@ -217,16 +169,17 @@ public class Tank : MonoBehaviour
         GameObject projectileObject = Instantiate(Enemy_Prefab, temp, Quaternion.identity);
     }
 
-    public string main_sign;
+    public string main_sign;    //用于场景转换
+
+
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         //Application.targetFrameRate = -1;
-        bullet_now = 0;
         invisible_now = 0;
-        enemy_gen_now = 0;
+        enemy_gen_now = enemy_gen_time;
         now_health = max_health;
         Inventory.SetActive(false);
         mask.instance.SetValue((float)1);
