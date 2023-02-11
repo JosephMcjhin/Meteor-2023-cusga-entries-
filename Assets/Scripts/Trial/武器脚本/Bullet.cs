@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rigidbody2d;
     Vector2 dir;
-    Animator animator;
+    //Animator animator;
     public float exist_time;
     float now_time;
 
@@ -15,13 +15,15 @@ public class Bullet : MonoBehaviour
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         now_time = exist_time;
     }
 
     public void Launch(Vector2 direction)
     {
+        //Debug.Log(direction.x);
+        //Debug.Log(direction.y);
         rigidbody2d.velocity = direction * speed;
         transform.right = direction.normalized;
     }
@@ -30,9 +32,17 @@ public class Bullet : MonoBehaviour
     {
         //���ǻ������˵�����־���˽�ɵ��������Ķ���
         Enemy a = other.gameObject.GetComponent<Enemy>();
+        Shield b = other.gameObject.GetComponent<Shield>();
+        boss c = other.gameObject.GetComponent<boss>();
         if (a != null)
         {
             a.Change_health(-1);
+        }
+        if(b != null){
+            b.Change_health(-1);
+        }
+        if(c != null){
+            c.Change_health(-1);
         }
         //Debug.Log("Projectile Collision with " + other.gameObject);
         Destroy(gameObject);
@@ -45,8 +55,8 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        animator.SetFloat("Look X", dir.x);
-        animator.SetFloat("Look Y", dir.y);
+        //animator.SetFloat("Look X", dir.x);
+        //animator.SetFloat("Look Y", dir.y);
         now_time -= Time.deltaTime;
     }
 }

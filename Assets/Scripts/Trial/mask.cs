@@ -5,14 +5,6 @@ using UnityEngine.UI;
 
 public class mask : MonoBehaviour
 {
-    public static mask instance;
-    void Awake(){
-        if(instance!=null){
-            Destroy(this);
-        }
-        instance = this;
-    }
-
     public Image Mask;
     float originalSize;
     void Start()

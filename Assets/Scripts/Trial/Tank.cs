@@ -51,6 +51,9 @@ public class Tank : MonoBehaviour
     //血量
     public int max_health;
     int now_health;
+
+    public GameObject mask_slot;
+    mask mask_now;
     public int Get_health(){
         return now_health;
     }
@@ -65,7 +68,7 @@ public class Tank : MonoBehaviour
             {
                 now_health += x;
                 invisible_now = invisible_time;
-                mask.instance.SetValue((float)now_health/max_health);
+                mask_now.SetValue((float)now_health/max_health);
                 if (now_health <= 0)
                 {
                     Destroy(gameObject);
@@ -76,7 +79,7 @@ public class Tank : MonoBehaviour
         {
             now_health += x;
             now_health = Mathf.Min(now_health, max_health);
-            mask.instance.SetValue((float)now_health/max_health);
+            mask_now.SetValue((float)now_health/max_health);
         }
 
         Debug.Log(now_health);
@@ -182,7 +185,8 @@ public class Tank : MonoBehaviour
         enemy_gen_now = enemy_gen_time;
         now_health = max_health;
         Inventory.SetActive(false);
-        mask.instance.SetValue((float)1);
         main_sign = "";
+        mask_now = mask_slot.GetComponent<mask>();
+        mask_now.SetValue(1f);
     }
 }
