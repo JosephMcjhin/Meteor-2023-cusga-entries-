@@ -13,25 +13,39 @@ public class InventoryManager : MonoBehaviour
         }
         instance = this;
     }
-    void Start(){
-        Refresh(bag, Grid);
-        Refresh(weapon_bag, weapon_grid);
-    }
-    public Inventory bag;
-    public GameObject Grid;
+    public List<Inventory> Bag = new List<Inventory>();
+    public List<GameObject> Grid = new List<GameObject>();
     //public Slot SlotPrefab;
     public Item DefaultItem;
 
-    public Inventory weapon_bag;
-    public GameObject weapon_grid;
+    //public Inventory weapon_bag;
+    //public GameObject weapon_grid;
+
+    //public Inventory merge_bag;
+    //public GameObject merge_grid;
+
+    public bool isok;
+
+    public Merge mm;
+
+    Dictionary<string, Item> dic = new Dictionary<string, Item>();
+
+    void Start(){
+        for(int i = 0;i < mm.recipe.Count; i ++){
+            dic[mm.recipe[i]] = mm.product[i];
+        }
+    }
 
     private void OnEnable(){
-        Refresh(bag, Grid);
-        Refresh(weapon_bag, weapon_grid);
+        transform.GetChild(0).position = transform.position;
+        isok = true;
+        for(int i = 0; i < Bag.Count; i ++){
+            Refresh(instance.Bag[i], instance.Grid[i]);
+        }
     }
 
     public static void pickup_add(Item item, int index){
-        AddItem(item, index, instance.Grid, instance.bag);
+        AddItem(item, index, instance.Grid[0], instance.Bag[0]);
     }
 
     public static void AddItem(Item item, int index, GameObject Grid, Inventory bag){
@@ -39,7 +53,8 @@ public class InventoryManager : MonoBehaviour
         temp.SlotItem = item;
         temp.SlotImage.sprite = item.ItemImage;
         temp.SlotNum.text = bag.NumList[index].ToString();
-        if(bag.NumList[index] == 0 || Grid.transform.GetChild(index).gameObject.CompareTag("Weapon")){
+        temp.SlotDes.text = item.ItemInfo;
+        if(bag.NumList[index] == 0 || Grid.transform.GetChild(index).gameObject.CompareTag("Weapon") || Grid.transform.GetChild(index).gameObject.CompareTag("Merge")){
             temp.SlotNum.enabled = false;
         }
         else{
@@ -66,10 +81,10 @@ public class InventoryManager : MonoBehaviour
     }
 
     public static void SwapList(int x1,int from1,int x2,int from2){
-        var temp11 = from1==1?instance.bag:instance.weapon_bag;
-        var temp22 = from2==1?instance.bag:instance.weapon_bag;
-        var temp33 = from1==1?instance.Grid:instance.weapon_grid;
-        var temp44 = from2==1?instance.Grid:instance.weapon_grid;
+        var temp11 = instance.Bag[from1-1];
+        var temp22 = instance.Bag[from2-1];
+        var temp33 = instance.Grid[from1-1];
+        var temp44 = instance.Grid[from2-1];
 
         var temp = temp11.ItemList[x1];
         temp11.ItemList[x1] = temp22.ItemList[x2];
@@ -83,14 +98,29 @@ public class InventoryManager : MonoBehaviour
                 //Debug.Log(Tank.instance.Weapon_slot.transform.childCount);
                 Destroy(Tank.instance.Weapon_slot.transform.GetChild(0).gameObject);
             }
-            Tank.instance.Weapon = instance.weapon_bag.ItemList[0].Weapon;
-            if(instance.weapon_bag.ItemList[0].Weapon != null){
-                GameObject new_Weapon = Instantiate(instance.weapon_bag.ItemList[0].Weapon,Tank.instance.Weapon_slot.transform.position,Quaternion.identity);
+            Tank.instance.Weapon = instance.Bag[1].ItemList[0].Weapon;
+            if(instance.Bag[1].ItemList[0].Weapon != null){
+                GameObject new_Weapon = Instantiate(instance.Bag[1].ItemList[0].Weapon,Tank.instance.Weapon_slot.transform.position,Quaternion.identity);
                 new_Weapon.transform.SetParent(Tank.instance.Weapon_slot.transform);
             }
         }
 
         AddItem(temp11.ItemList[x1],x1,temp33,temp11);
         AddItem(temp22.ItemList[x2],x2,temp44,temp22);
+    }
+
+    public static void DelPre(){
+        instance.Bag[2].ItemList[0] = instance.Bag[2].ItemList[1] = instance.DefaultItem;
+        instance.Bag[2].NumList[0] = instance.Bag[2].NumList[1] = 0;
+        AddItem(instance.DefaultItem, 0, instance.Grid[2], instance.Bag[2]);
+        AddItem(instance.DefaultItem, 1, instance.Grid[2], instance.Bag[2]);
+    }
+
+    void Update(){
+        if(Bag[2].ItemList[2].ItemID == "0000" && dic.ContainsKey(Bag[2].ItemList[0].ItemID + Bag[2].ItemList[1].ItemID)){
+            Bag[2].ItemList[2] = dic[Bag[2].ItemList[0].ItemID + Bag[2].ItemList[1].ItemID];
+            Bag[2].NumList[2] = 1;
+            AddItem(Bag[2].ItemList[2], 2, Grid[2], Bag[2]);
+        }
     }
 }

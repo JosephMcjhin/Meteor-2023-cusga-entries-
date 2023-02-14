@@ -15,3 +15,5 @@ MonoBehaviour:
   ItemName: "\u5934\u76D4"
   ItemImage: {fileID: 965023414, guid: 81aa720660d496a4e8f5106c4eb30a37, type: 3}
   ItemInfo: "\u8FD9\u662F\u5934\u76D4"
+  Weapon: {fileID: 0}
+  ItemID: 0002

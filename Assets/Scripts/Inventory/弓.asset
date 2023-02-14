@@ -16,3 +16,4 @@ MonoBehaviour:
   ItemImage: {fileID: 996682689, guid: 81aa720660d496a4e8f5106c4eb30a37, type: 3}
   ItemInfo: "\u8FD9\u662F\u4E00\u628A\u5F13"
   Weapon: {fileID: 5770477309123772348, guid: 50f84146e2658a140984c5eb58e05453, type: 3}
+  ItemID: 0003
