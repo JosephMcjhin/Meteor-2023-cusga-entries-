@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -1499,13 +1499,13 @@ TextureImporter:
       Enemys_0: -182586665
       Enemys_6: 1124410824
       Enemys_26: -482481646
+      Enemys_31: 1511926247
       Enemys_29: -2071177989
       Enemys_3: 205233778
       Enemys_59: -138353568
-      Enemys_31: 1511926247
-      Enemys_63: 5717630
-      Enemys_38: -1538322021
       Enemys_7: 1625321108
+      Enemys_38: -1538322021
+      Enemys_63: 5717630
       Enemys_19: 252930505
       Enemys_52: -573549543
       Enemys_53: -1879663376

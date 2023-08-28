@@ -3,24 +3,34 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Item
+  - Weapon
+  - Merge
+  - Background
+  - TianxingSoldier
+  - ChunSoldier
+  - Bee
+  - Immortal
+  - ImmortalGhost
+  - Ghost
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - enemy
   - Water
   - UI
   - main
   - bullet
+  - enemy_bullet
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Background
   - 
   - 
   - 

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a3be7e3b10a3a43a5a4e5e19171ad4, type: 3}
+  m_Name: "0005_\u5C71\u8C370"
+  m_EditorClassIdentifier: 
+  note_id: 5
+  text_con:
+  - "\u7EAA\u5FF5\u5728\u707E\u52AB\u7EAA\u51431\u5E74\u7B2C\u4E00\u6B21\u536B\u56FD\u6218\u4E89\u4E2D\u727A\u7272\u7684\u5929\u661F\u65CF\u540C\u80DE\u4EEC,\u4F60\u4EEC\u7684\u4ED8\u51FA\u8BA9\u4E91\u4E4B\u6587\u660E\u6C38\u5782\u4E0D\u673D."
+  - "\u4E91\u56FD\u4E4B\u706D,\u7F6A\u4E0D\u5728\u6C5D\u7B49,\u800C\u5728\u8D24\u8005."
+  tel_id: 03000000
+  tel_loc: 00000000
+  tel_st: 03000000
+  tel_ed: 08000000

@@ -124,5 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15dee1dabdfa69546a3bca14efded34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: c4adb54ab42e5b44b94a6417224b194a, type: 2}
-  bag: {fileID: 11400000, guid: 5b436a0b77cc12540b4f9363f6adc71e, type: 2}
+  item: {fileID: 11400000, guid: 8f1b8fa1c6843fe429f8da04ccf424e7, type: 2}
+  bag: {fileID: 11400000, guid: c4cf2780f6318574382c05f2459c06e4, type: 2}
