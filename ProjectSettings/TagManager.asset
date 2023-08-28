@@ -7,11 +7,18 @@ TagManager:
   - Item
   - Weapon
   - Merge
+  - Background
+  - TianxingSoldier
+  - ChunSoldier
+  - Bee
+  - Immortal
+  - ImmortalGhost
+  - Ghost
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - enemy
   - Water
   - UI
   - main
@@ -23,7 +30,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 

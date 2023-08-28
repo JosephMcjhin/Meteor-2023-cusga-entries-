@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f74a5de94efca74e94020077b9349f3, type: 3}
+  m_Name: "\u4F20\u9001\u70B93"
+  m_EditorClassIdentifier: 
+  tel_id: 3
+  tel_time: "\u707E\u52AB\u7EAA\u51431\u5E74"
+  tel_name: "\u7EDD\u671B\u4E4B\u6218"
+  to_scene: "\u5C71\u8C37"
+  to_sign: chuansongtai_0
+  tel_info: "\u4F5C\u4E3A\u4E94\u5927\u6587\u660E\u5C45\u6C11\u4E4B\u4E00\u7684\u5929\u661F\u65CF\u4EBA,\u4E3A\u4F55\u5728\u4E91\u6C14\u6587\u660E\u7684\u5730\u76D8\u4E0A\u505A\u4E8B?\u90A3\u4E00\u665A\u7A76\u7ADF\u53D1\u751F\u4E86\u4EC0\u4E48?\u4E3A\u4F55\u4E4B\u540E,\u4F3C\u4E4E\u518D\u6CA1\u6709\u8FD9\u4E2A\u6587\u660E\u7684\u4FE1\u606F\u4E86?"

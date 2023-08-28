@@ -148,6 +148,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exist_time: 1
+  charge:
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
   speed: 10
 --- !u!95 &-6321947787889231369
 Animator:
